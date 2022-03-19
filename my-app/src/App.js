@@ -1,10 +1,14 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
+
 import TextCounter from "./TextCounter";
+import MyForm from "./MyForm";
+
 function App() {
   return (
-    <div>
-      <TextCounter limit={20} />
-    </div>
+      <div>
+        <TextCounter limit={20} />
+          <MyForm />
+      </div>
   );
 }
 
