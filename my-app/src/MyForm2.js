@@ -21,6 +21,7 @@ class MyForm2 extends Component {
                     <label>
                         Name:
                         <input
+                            defaultValue={'abcd'}
                             type='text'
                             name='name'
                             ref={this.inputName}
