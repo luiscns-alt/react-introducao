@@ -7,21 +7,31 @@ class MyForm2 extends Component {
         this.inputName = React.createRef();
 
         this.handleSubmit = this.handleSubmit.bind(this);
+
+        this.state = {
+            list: []
+        }
     }
 
     handleSubmit(e) {
-        console.log(this.inputName.current.value);
         e.preventDefault();
+        fetch(`https://api.github.com/search/repositories?q=${this.inputName.current.value}`)
+            .then(response => response.json())
+            .then(data => {
+                this.setState({
+                    list: data.items
+                })
+            })
     }
 
     render() {
+        const { state } = this;
         return (
             <form onSubmit={this.handleSubmit}>
                 <div>
                     <label>
                         Name:
                         <input
-                            defaultValue={'abcd'}
                             type='text'
                             name='name'
                             ref={this.inputName}
@@ -29,6 +39,9 @@ class MyForm2 extends Component {
                     </label>
                 </div>
                 <input type="submit" value='Enviar' />
+                <ul>
+                    {state.list.map(item => <li>{item.full_name}</li>)}
+                </ul>
             </form>
         );
     }
